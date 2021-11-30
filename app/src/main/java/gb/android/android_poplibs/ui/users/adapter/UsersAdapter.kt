@@ -1,9 +1,12 @@
 package gb.android.android_poplibs.ui.users.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import gb.android.android_poplibs.App
 import gb.android.android_poplibs.databinding.ItemUserBinding
+import gb.android.android_poplibs.screens.AppScreens
 import gb.android.android_poplibs.ui.users.UserItemView
 import gb.android.android_poplibs.ui.users.UsersPresenter
 
@@ -20,7 +23,8 @@ class UsersAdapter(
             )
         ).apply {
             itemView.setOnClickListener {
-                presenter.itemClickListener()
+                Log.d("BLAH", "itemView.setOnClickListener $pos")
+                presenter.itemClickListener
             }
         }
     }

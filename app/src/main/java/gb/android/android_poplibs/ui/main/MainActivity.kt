@@ -16,12 +16,6 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
     override fun onResumeFragments() {
         super.onResumeFragments()
         App.instance.navigationHolder.setNavigator(navigator)
-
-
-    }
-
-    fun Foo(str1: String, str2: String): String? {
-        return null
     }
 
     override fun onPause() {

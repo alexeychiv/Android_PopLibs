@@ -14,12 +14,9 @@ class GithubUsersRepository {
         GithubUserModel("user7"),
     )
 
-    fun getUsers() : List<GithubUserModel> {
+    fun getUsers(): List<GithubUserModel> {
         return users
     }
-
-
-
 
 
 }

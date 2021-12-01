@@ -1,7 +1,6 @@
 package gb.android.android_poplibs.ui.users
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +19,12 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val binding: FragmentUsersBinding
         get() = _binding!!
 
-    private val adapter by lazy {
-        UsersAdapter(presenter.usersListPresenter)
-    }
-
     private val presenter by moxyPresenter {
         UsersPresenter(App.instance.router, GithubUsersRepository())
+    }
+
+    private val adapter by lazy {
+        UsersAdapter(presenter.usersListPresenter)
     }
 
 

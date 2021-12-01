@@ -2,15 +2,15 @@ package gb.android.android_poplibs.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import gb.android.android_poplibs.databinding.ItemUserBinding
-import gb.android.android_poplibs.ui.users.UserItemView
-import gb.android.android_poplibs.ui.users.UsersPresenter
+import gb.android.android_poplibs.model.GithubUserModel
 
 
 class UsersAdapter(
-    private val presenter: UsersPresenter.UsersListPresenter
-) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+    private val itemClickListener: (GithubUserModel) -> Unit,
+) : ListAdapter<GithubUserModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
@@ -19,36 +19,30 @@ class UsersAdapter(
                 parent,
                 false
             )
-        ).apply {
-            itemView.setOnClickListener {
-                presenter.itemClickListener(this)
-            }
-        }
+        )
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        presenter.bindView(holder.apply { pos = position })
+        holder.setLogin(currentList[position])
     }
 
-    override fun getItemCount(): Int {
-        return presenter.getCount()
-    }
 
     //==========================================================================
     // USER VIEW HOLDER
 
     inner class UserViewHolder(
         private val binding: ItemUserBinding
-    ) : RecyclerView.ViewHolder(binding.root), UserItemView {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        override var pos: Int = -1
+        fun setLogin(githubUserModel: GithubUserModel) {
+            binding.tvLogin.text = githubUserModel.login
 
-        override fun setLogin(login: String) {
-            binding.tvLogin.text = login
+            binding.root.setOnClickListener {
+                itemClickListener(githubUserModel)
+            }
         }
 
     }
 
 }
-
 

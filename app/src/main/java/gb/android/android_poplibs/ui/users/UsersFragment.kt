@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.databinding.FragmentUsersBinding
 import gb.android.android_poplibs.domain.GithubUsersRepository
+import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.ui.base.BackButtonListener
 import gb.android.android_poplibs.ui.users.adapter.UsersAdapter
 import moxy.MvpAppCompatFragment
@@ -24,7 +25,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
     private val adapter by lazy {
-        UsersAdapter(presenter.usersListPresenter)
+        UsersAdapter(presenter::onUserClicked)
     }
 
 
@@ -49,8 +50,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         _binding = null
     }
 
-    override fun updateList() {
-        adapter.notifyDataSetChanged()
+    override fun updateList(users: List<GithubUserModel>) {
+        adapter.submitList(users)
     }
 
     override fun backPressed(): Boolean {

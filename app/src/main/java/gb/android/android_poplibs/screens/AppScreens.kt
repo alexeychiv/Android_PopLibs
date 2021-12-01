@@ -15,7 +15,7 @@ object AppScreens {
     fun userScreen(githubUserData: GithubUserModel) = FragmentScreen {
         UserFragment().apply {
             arguments = bundleOf(
-                "githubUserData" to githubUserData
+                "login" to githubUserData.login
             )
         }
     }

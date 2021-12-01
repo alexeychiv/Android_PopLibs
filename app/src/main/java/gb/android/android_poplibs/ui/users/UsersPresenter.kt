@@ -23,7 +23,6 @@ class UsersPresenter(
         super.onFirstViewAttach()
 
         usersListPresenter.itemClickListener = {
-            Log.d("BLAH", "usersListPresenter.itemClickListener ${it.pos}")
             App.instance.router.navigateTo(AppScreens.userScreen(usersListPresenter.users[it.pos]))
         }
 
@@ -40,9 +39,7 @@ class UsersPresenter(
 
         val users = mutableListOf<GithubUserModel>()
 
-        override var itemClickListener: (IItemView) -> Unit = {
-            Log.d("BLAH", "usersListPresenter.itemClickListener __ ${it.pos}")
-        }
+        override var itemClickListener: (IItemView) -> Unit = {}
 
         override fun getCount(): Int = users.size
 

@@ -5,7 +5,7 @@ import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
 
-interface UserView : MvpView {
+interface UserDetailsView : MvpView {
 
     @AddToEndSingle
     fun updateUser(githubUserModel: GithubUserModel)

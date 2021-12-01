@@ -5,21 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import gb.android.android_poplibs.App
-import gb.android.android_poplibs.databinding.FragmentUserBinding
+import gb.android.android_poplibs.databinding.FragmentUserDetailsBinding
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.ui.base.BackButtonListener
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
+class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView, BackButtonListener {
 
-    private var _binding: FragmentUserBinding? = null
-    private val binding: FragmentUserBinding
+    private var _binding: FragmentUserDetailsBinding? = null
+    private val binding: FragmentUserDetailsBinding
         get() = _binding!!
 
 
     private val presenter by moxyPresenter {
-        UserPresenter(
+        UserDetailsPresenter(
             App.instance.router,
             requireArguments().getParcelable<GithubUserModel>("githubUserModel")!!
         )
@@ -31,7 +31,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentUserBinding.inflate(inflater, container, false)
+        _binding = FragmentUserDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

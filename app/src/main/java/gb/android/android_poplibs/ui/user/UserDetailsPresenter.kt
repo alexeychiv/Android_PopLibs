@@ -4,10 +4,10 @@ import com.github.terrakok.cicerone.Router
 import gb.android.android_poplibs.model.GithubUserModel
 import moxy.MvpPresenter
 
-class UserPresenter(
+class UserDetailsPresenter(
     private val router: Router,
     private val userModel: GithubUserModel
-) : MvpPresenter<UserView>() {
+) : MvpPresenter<UserDetailsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

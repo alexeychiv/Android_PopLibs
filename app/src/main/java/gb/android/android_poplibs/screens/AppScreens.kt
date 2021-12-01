@@ -3,7 +3,7 @@ package gb.android.android_poplibs.screens
 import androidx.core.os.bundleOf
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import gb.android.android_poplibs.model.GithubUserModel
-import gb.android.android_poplibs.ui.user.UserFragment
+import gb.android.android_poplibs.ui.user.UserDetailsFragment
 import gb.android.android_poplibs.ui.users.UsersFragment
 
 object AppScreens {
@@ -13,7 +13,7 @@ object AppScreens {
     }
 
     fun userScreen(githubUserModel: GithubUserModel) = FragmentScreen {
-        UserFragment().apply {
+        UserDetailsFragment().apply {
             arguments = bundleOf(
                 "githubUserModel" to githubUserModel
             )

@@ -8,6 +8,6 @@ import moxy.viewstate.strategy.alias.AddToEnd
 interface UsersView : MvpView {
 
     @AddToEnd
-    fun updateList(users: List<GithubUserModel>)
+    fun updateList(user: List<GithubUserModel>)
 
 }

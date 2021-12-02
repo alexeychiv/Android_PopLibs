@@ -22,7 +22,11 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        viewState.updateList(usersRepository.getUsers())
+        usersRepository.getUsers()
+            .doOnNext {
+                viewState.updateList(it)
+            }
+            .subscribe()
     }
 
     fun backPressed(): Boolean {

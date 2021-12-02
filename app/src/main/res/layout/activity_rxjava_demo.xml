@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_horizontal"
+		android:orientation="vertical"
+		android:padding="16dp">
+		
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:text="Operators"
+			android:textSize="25sp" />
+		
+		<Button
+			android:id="@+id/btnJust"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Just" />
+		
+		<Button
+			android:id="@+id/btnDelayedJust"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="DELAYED Just" />
+		
+		<Button
+			android:id="@+id/btnFromIterable"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="FromIterable" />
+		
+		<Button
+			android:id="@+id/btnRange"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Range" />
+		
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+			
+			<Button
+				android:id="@+id/btnInterval"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Interval" />
+			
+			<Button
+				android:id="@+id/btnDisposeInterval"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="5dp"
+				android:text="Dispose Interval" />
+		
+		</LinearLayout>
+		
+		<Button
+			android:id="@+id/btnTimer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Timer" />
+		
+		<Button
+			android:id="@+id/btnFromCallable"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="FromCallable" />
+		
+		<Button
+			android:id="@+id/btnCreate"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Create" />
+		
+		
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="2dp"
+			android:background="@color/black" />
+		
+		
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp"
+			android:text="Filters"
+			android:textSize="25sp" />
+		
+		<Button
+			android:id="@+id/btnSkip"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Skip" />
+		
+		<Button
+			android:id="@+id/btnTake"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Take" />
+		
+		<Button
+			android:id="@+id/btnTakeLast"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="TakeLast" />
+		
+		<Button
+			android:id="@+id/btnMap"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Map" />
+		
+		<Button
+			android:id="@+id/btnDistinct"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Distinct" />
+		
+		<Button
+			android:id="@+id/btnFilter"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Filter" />
+		
+		
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="2dp"
+			android:background="@color/black" />
+		
+		
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp"
+			android:text="Merging Operators"
+			android:textSize="25sp" />
+		
+		
+		<Button
+			android:id="@+id/btnMergeWith"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="MergeWith" />
+		
+		<Button
+			android:id="@+id/btnFlatMap"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="FlatMap" />
+		
+		<Button
+			android:id="@+id/btnSwitchMap"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="SwitchMap" />
+		
+		<Button
+			android:id="@+id/btnZip"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Zip" />
+	
+	
+	</LinearLayout>
+
+</ScrollView>

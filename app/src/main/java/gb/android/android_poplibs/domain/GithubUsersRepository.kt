@@ -1,6 +1,8 @@
 package gb.android.android_poplibs.domain
 
 import gb.android.android_poplibs.model.GithubUserModel
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Observable
 
 class GithubUsersRepository {
 
@@ -14,8 +16,8 @@ class GithubUsersRepository {
         GithubUserModel("user7"),
     )
 
-    fun getUsers(): List<GithubUserModel> {
-        return users
+    fun getUsers(): @NonNull Observable<List<GithubUserModel>> {
+        return Observable.just(users)
     }
 
 

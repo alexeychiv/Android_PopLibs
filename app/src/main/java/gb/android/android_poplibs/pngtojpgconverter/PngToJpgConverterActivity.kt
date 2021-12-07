@@ -43,7 +43,7 @@ class PngToJpgConverterActivity : AppCompatActivity() {
 
         binding.btnLoadPngImage.setOnClickListener {
             if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                // объясняем пользователю, почему нам необходимо данное разрешение
+                Log.d("BLAH", "Converter wont work without permission to read/write in External Storage")
             } else {
                 permission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }

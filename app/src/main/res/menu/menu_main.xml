@@ -3,4 +3,7 @@
 	<item
 		android:id="@+id/menu_main_item_rxJavaDemo"
 		android:title="RxJava Demo" />
+	<item
+		android:id="@+id/menu_main_item_pngToJpegConverter"
+		android:title="PNG to JPEG Converter" />
 </menu>

@@ -1,5 +1,6 @@
 package gb.android.android_poplibs.ui.main
 
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.github.terrakok.cicerone.androidx.AppNavigator
@@ -45,6 +46,10 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
         return when (item.itemId) {
             R.id.menu_main_item_rxJavaDemo -> {
                 App.instance.router.navigateTo(AppScreens.rxJavaDemoScreen())
+                true
+            }
+            R.id.menu_main_item_pngToJpegConverter -> {
+                App.instance.router.navigateTo(AppScreens.PngToJpgConverterScreen())
                 true
             }
             else -> super.onContextItemSelected(item)

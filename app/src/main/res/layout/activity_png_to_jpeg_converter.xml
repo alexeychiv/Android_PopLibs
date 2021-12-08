@@ -8,12 +8,28 @@
 		android:id="@+id/btnLoadPngImage"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="Load PNG Image" />
+		android:layout_gravity="center"
+		android:text="Load PNG Image and Convert to Jpeg" />
+	
+	<Button
+		android:id="@+id/btnCancel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="Cancel conversion"
+		android:visibility="gone" />
 	
 	<ImageView
 		android:id="@+id/imgLoadedPngImage"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />
 	
+	<TextView
+		android:id="@+id/textSuccess"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:text="Success"
+		android:visibility="gone" />
 
 </LinearLayout>

@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "gb.android.android_poplibs_001_architecture_mvp"
-        minSdk 24
+        minSdk 29
         targetSdk 31
         versionCode 1
         versionName "1.0"

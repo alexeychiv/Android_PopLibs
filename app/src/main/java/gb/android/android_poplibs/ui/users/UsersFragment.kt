@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.databinding.FragmentUsersBinding
@@ -53,6 +54,16 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     override fun updateList(users: List<GithubUserModel>) {
         adapter.submitList(users)
+    }
+
+    override fun showLoading() {
+        binding.loadingView.isVisible = true
+        binding.usersRecycler.isVisible = false
+    }
+
+    override fun hideLoading() {
+        binding.loadingView.isVisible = false
+        binding.usersRecycler.isVisible = true
     }
 
     override fun backPressed(): Boolean {

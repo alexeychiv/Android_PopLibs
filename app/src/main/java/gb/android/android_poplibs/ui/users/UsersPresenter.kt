@@ -28,12 +28,17 @@ class UsersPresenter(
         usersRepositoryImpl.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                viewState.showLoading()
+            }
             .subscribe(
                 { users ->
                     viewState.updateList(users)
+                    viewState.hideLoading()
                 },
                 { e ->
                     Log.e("Retrofit", "ERROR: Unable to receive users list!", e)
+                    viewState.hideLoading()
                 }
             )
     }

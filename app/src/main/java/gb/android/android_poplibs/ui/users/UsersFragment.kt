@@ -12,6 +12,7 @@ import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.remote.ApiHolder
 import gb.android.android_poplibs.ui.base.BackButtonListener
+import gb.android.android_poplibs.ui.imageloading.GlideImageLoader
 import gb.android.android_poplibs.ui.users.adapter.UsersAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -27,7 +28,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
     private val adapter by lazy {
-        UsersAdapter(presenter::onUserClicked)
+        UsersAdapter(presenter::onUserClicked, GlideImageLoader())
     }
 
 

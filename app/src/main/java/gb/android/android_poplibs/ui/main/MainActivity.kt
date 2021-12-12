@@ -52,6 +52,10 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
                 App.instance.router.navigateTo(AppScreens.PngToJpgConverterScreen())
                 true
             }
+            R.id.menu_main_item_okHTTP -> {
+                App.instance.router.navigateTo(AppScreens.OkHTTPScreen())
+                true
+            }
             else -> super.onContextItemSelected(item)
         }
     }

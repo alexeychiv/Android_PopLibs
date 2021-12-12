@@ -6,4 +6,7 @@
 	<item
 		android:id="@+id/menu_main_item_pngToJpegConverter"
 		android:title="PNG to JPEG Converter" />
+	<item
+		android:id="@+id/menu_main_item_okHTTP"
+		android:title="OkHTTP" />
 </menu>

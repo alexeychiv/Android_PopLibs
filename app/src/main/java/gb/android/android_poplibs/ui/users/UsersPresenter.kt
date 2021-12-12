@@ -1,15 +1,18 @@
 package gb.android.android_poplibs.ui.users
 
+import android.util.Log
 import com.github.terrakok.cicerone.Router
 import gb.android.android_poplibs.App
-import gb.android.android_poplibs.domain.GithubUsersRepository
+import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.screens.AppScreens
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
 class UsersPresenter(
     private val router: Router,
-    private val usersRepository: GithubUsersRepository
+    private val usersRepositoryImpl: GithubUsersRepositoryImpl
 ) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
@@ -22,11 +25,17 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        usersRepository.getUsers()
-            .doOnNext {
-                viewState.updateList(it)
-            }
-            .subscribe()
+        usersRepositoryImpl.getUsers()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { users ->
+                    viewState.updateList(users)
+                },
+                { e ->
+                    Log.e("Retrofit", "ERROR: Unable to receive users list!", e)
+                }
+            )
     }
 
     fun backPressed(): Boolean {

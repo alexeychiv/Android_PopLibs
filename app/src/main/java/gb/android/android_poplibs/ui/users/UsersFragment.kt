@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.databinding.FragmentUsersBinding
-import gb.android.android_poplibs.domain.GithubUsersRepository
+import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
+import gb.android.android_poplibs.remote.ApiHolder
 import gb.android.android_poplibs.ui.base.BackButtonListener
 import gb.android.android_poplibs.ui.users.adapter.UsersAdapter
 import moxy.MvpAppCompatFragment
@@ -21,7 +22,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         get() = _binding!!
 
     private val presenter by moxyPresenter {
-        UsersPresenter(App.instance.router, GithubUsersRepository())
+        UsersPresenter(App.instance.router, GithubUsersRepositoryImpl(ApiHolder.retrofitService))
     }
 
     private val adapter by lazy {

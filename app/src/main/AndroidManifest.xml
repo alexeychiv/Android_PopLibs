@@ -26,9 +26,9 @@
 			</intent-filter>
 		</activity>
 		
-		<activity android:name="gb.android.android_poplibs.rxjavademo.RxJavaDemoActivity" />
-		<activity android:name=".pngtojpgconverter.PngToJpgConverterActivity" />
-		<activity android:name=".okhttp.OkHTTPActivity" />
+		<activity android:name="gb.android.demos.rxjavademo.RxJavaDemoActivity" />
+		<activity android:name="gb.android.demos.pngtojpgconverter.PngToJpgConverterActivity" />
+		<activity android:name="gb.android.demos.okhttp.OkHTTPActivity" />
 	
 	</application>
 

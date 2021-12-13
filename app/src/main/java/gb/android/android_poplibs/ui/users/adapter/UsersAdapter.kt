@@ -26,7 +26,7 @@ class UsersAdapter(
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.setLogin(currentList[position])
+        holder.showUser(currentList[position])
     }
 
 
@@ -37,10 +37,9 @@ class UsersAdapter(
         private val binding: ItemUserBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setLogin(githubUserModel: GithubUserModel) {
-            binding.tvLogin.text = githubUserModel.login
-
+        fun showUser(githubUserModel: GithubUserModel) {
             imageLoader.loadInto(githubUserModel.avatarUrl, binding.ivAvatar)
+            binding.tvLogin.text = githubUserModel.login
 
             binding.root.setOnClickListener {
                 itemClickListener(githubUserModel)

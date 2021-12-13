@@ -5,7 +5,7 @@ import com.github.terrakok.cicerone.Router
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
-import gb.android.android_poplibs.screens.AppScreens
+import gb.android.android_poplibs.navigation.AppScreens
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
@@ -21,7 +21,7 @@ class UsersPresenter(
     }
 
     fun onUserClicked(githubUserModel: GithubUserModel) {
-        App.instance.router.navigateTo(AppScreens.userScreen(githubUserModel))
+        router.navigateTo(AppScreens.userDetailsScreen(githubUserModel))
     }
 
     private fun loadData() {

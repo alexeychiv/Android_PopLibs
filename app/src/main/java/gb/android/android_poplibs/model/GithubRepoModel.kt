@@ -16,4 +16,4 @@ data class GithubRepoModel(
 @Parcelize
 data class GithubRepoOwner(
     @Expose @SerializedName("id") val id: String,
-): Parcelable
+) : Parcelable

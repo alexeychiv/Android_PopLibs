@@ -2,7 +2,6 @@ package gb.android.android_poplibs.ui.userdetails.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import gb.android.android_poplibs.model.GithubRepoModel
-import gb.android.android_poplibs.model.GithubUserModel
 
 
 object GithubRepoItemCallback : DiffUtil.ItemCallback<GithubRepoModel>() {

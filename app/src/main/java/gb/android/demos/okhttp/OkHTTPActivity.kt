@@ -27,7 +27,7 @@ class OkHTTPActivity : AppCompatActivity() {
                 .url("https://api.github.com/users")
                 .build()
 
-            okHttpClient.newCall(request).enqueue(object: Callback {
+            okHttpClient.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     Log.e("OkHTTP", "ERROR: Request failed!", e)
                 }

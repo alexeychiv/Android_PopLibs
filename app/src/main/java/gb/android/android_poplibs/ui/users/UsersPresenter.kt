@@ -2,7 +2,6 @@ package gb.android.android_poplibs.ui.users
 
 import android.util.Log
 import com.github.terrakok.cicerone.Router
-import gb.android.android_poplibs.App
 import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.navigation.AppScreens
@@ -12,7 +11,7 @@ import moxy.MvpPresenter
 
 class UsersPresenter(
     private val router: Router,
-    private val usersRepositoryImpl: GithubUsersRepositoryImpl
+    private val githubUsersRepositoryImpl: GithubUsersRepositoryImpl
 ) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
@@ -25,7 +24,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        usersRepositoryImpl.getUsers()
+        githubUsersRepositoryImpl.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {

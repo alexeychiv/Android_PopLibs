@@ -8,9 +8,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.databinding.FragmentUsersBinding
+import gb.android.android_poplibs.db.AppDatabase
 import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.remote.ApiHolder
+import gb.android.android_poplibs.remote.connectivity.NetworkStatus
 import gb.android.android_poplibs.ui.base.BackButtonListener
 import gb.android.android_poplibs.ui.imageloading.GlideImageLoader
 import gb.android.android_poplibs.ui.users.adapter.UsersAdapter
@@ -23,8 +25,17 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val binding: FragmentUsersBinding
         get() = _binding!!
 
+    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+
     private val presenter by moxyPresenter {
-        UsersPresenter(App.instance.router, GithubUsersRepositoryImpl(ApiHolder.retrofitService))
+        UsersPresenter(
+            router = App.instance.router,
+            githubUsersRepositoryImpl = GithubUsersRepositoryImpl(
+                networkStatus = status,
+                retrofitService = ApiHolder.retrofitService,
+                db = AppDatabase.instance,
+            )
+        )
     }
 
     private val adapter by lazy {

@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 
 
-class GlideImageLoader: ImageLoader<ImageView> {
+class GlideImageLoader : ImageLoader<ImageView> {
 
     override fun loadInto(url: String, container: ImageView) {
         Glide.with(container.context)
@@ -18,7 +18,7 @@ class GlideImageLoader: ImageLoader<ImageView> {
             .load(url)
             .circleCrop()
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-            .listener(object: RequestListener<Bitmap> {
+            .listener(object : RequestListener<Bitmap> {
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,

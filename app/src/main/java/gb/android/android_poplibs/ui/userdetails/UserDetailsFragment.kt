@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.databinding.FragmentUserDetailsBinding
+import gb.android.android_poplibs.db.AppDatabase
 import gb.android.android_poplibs.domain.GithubRepoRepositoryImpl
 import gb.android.android_poplibs.model.GithubRepoModel
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.remote.ApiHolder
+import gb.android.android_poplibs.remote.connectivity.NetworkStatus
 import gb.android.android_poplibs.ui.base.BackButtonListener
+import gb.android.android_poplibs.ui.imageloading.GlideImageLoader
 import gb.android.android_poplibs.ui.imageloading.ImageLoader
 import gb.android.android_poplibs.ui.userdetails.adapter.RepoListAdapter
 import moxy.MvpAppCompatFragment
@@ -23,6 +27,18 @@ class UserDetailsFragment(
     private val imageLoader: ImageLoader<ImageView>,
 ) : MvpAppCompatFragment(), UserDetailsView, BackButtonListener {
 
+    companion object {
+
+        private const val KEY_USER_MODEL = "KEY_USER_MODEL"
+
+        fun newInstance(githubUserModel: GithubUserModel): UserDetailsFragment {
+            return UserDetailsFragment(GlideImageLoader()).apply {
+                arguments = bundleOf(KEY_USER_MODEL to githubUserModel)
+            }
+        }
+    }
+
+
     private var _binding: FragmentUserDetailsBinding? = null
     private val binding: FragmentUserDetailsBinding
         get() = _binding!!
@@ -30,9 +46,13 @@ class UserDetailsFragment(
 
     private val presenter by moxyPresenter {
         UserDetailsPresenter(
-            App.instance.router,
-            requireArguments().getParcelable<GithubUserModel>("githubUserModel")!!,
-            GithubRepoRepositoryImpl(ApiHolder.retrofitService)
+            router = App.instance.router,
+            githubUserModel = requireArguments().getParcelable<GithubUserModel>(KEY_USER_MODEL)!!,
+            githubRepoRepository = GithubRepoRepositoryImpl(
+                networkStatus = NetworkStatus(requireContext()),
+                retrofitService = ApiHolder.retrofitService,
+                db = AppDatabase.instance,
+            )
         )
     }
 
@@ -44,7 +64,7 @@ class UserDetailsFragment(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUserDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }

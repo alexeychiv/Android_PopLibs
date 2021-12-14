@@ -12,14 +12,14 @@ import moxy.MvpPresenter
 
 class UserDetailsPresenter(
     private val router: Router,
-    private val userModel: GithubUserModel,
+    private val githubUserModel: GithubUserModel,
     private val githubRepoRepository: GithubRepoRepository,
 ) : MvpPresenter<UserDetailsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        viewState.updateUser(userModel)
+        viewState.updateUser(githubUserModel)
         loadReposData()
     }
 
@@ -29,7 +29,7 @@ class UserDetailsPresenter(
     }
 
     private fun loadReposData() {
-        githubRepoRepository.getRepos(userModel.reposUrl)
+        githubRepoRepository.getRepos(githubUserModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {

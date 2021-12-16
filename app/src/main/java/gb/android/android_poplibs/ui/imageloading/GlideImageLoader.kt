@@ -8,16 +8,20 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import gb.android.android_poplibs.cache.ImageCache
 
 
-class GlideImageLoader : ImageLoader<ImageView> {
+class GlideImageLoader(
+    private val imageCache: ImageCache
+) : ImageLoader<ImageView> {
 
     override fun loadInto(url: String, container: ImageView) {
         Glide.with(container.context)
             .asBitmap()
             .load(url)
             .circleCrop()
-            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
             .listener(object : RequestListener<Bitmap> {
                 override fun onLoadFailed(
                     e: GlideException?,
@@ -25,7 +29,8 @@ class GlideImageLoader : ImageLoader<ImageView> {
                     target: Target<Bitmap>?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    return false
+                    //container.setImageBitmap(imageCache.getImage(url))
+                    return true
                 }
 
                 override fun onResourceReady(
@@ -35,6 +40,9 @@ class GlideImageLoader : ImageLoader<ImageView> {
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
+                    /*resource?.let {
+                        imageCache.cacheImage(url, it)
+                    }*/
                     return false
                 }
 

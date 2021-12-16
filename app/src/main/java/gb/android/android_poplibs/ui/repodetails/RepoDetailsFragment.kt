@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.databinding.FragmentRepoDetailsBinding
 import gb.android.android_poplibs.model.GithubRepoModel
@@ -13,6 +14,18 @@ import moxy.ktx.moxyPresenter
 
 class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonListener {
 
+    companion object {
+
+        private const val KEY_REPO_MODEL = "KEY_REPO_MODEL"
+
+        fun newInstance(githubRepoModel: GithubRepoModel): RepoDetailsFragment {
+            return RepoDetailsFragment().apply {
+                arguments = bundleOf(KEY_REPO_MODEL to githubRepoModel)
+            }
+        }
+    }
+
+
     private var _binding: FragmentRepoDetailsBinding? = null
     private val binding: FragmentRepoDetailsBinding
         get() = _binding!!
@@ -21,7 +34,7 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     private val presenter by moxyPresenter {
         RepoDetailsPresenter(
             App.instance.router,
-            requireArguments().getParcelable<GithubRepoModel>("githubRepoModel")!!
+            requireArguments().getParcelable<GithubRepoModel>(KEY_REPO_MODEL)!!
         )
     }
 

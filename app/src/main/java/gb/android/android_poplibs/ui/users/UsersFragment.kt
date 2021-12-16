@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
+import gb.android.android_poplibs.cache.RoomCacheImage
+import gb.android.android_poplibs.cache.RoomUsersCache
 import gb.android.android_poplibs.databinding.FragmentUsersBinding
 import gb.android.android_poplibs.db.AppDatabase
 import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
@@ -33,13 +35,13 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
             githubUsersRepositoryImpl = GithubUsersRepositoryImpl(
                 networkStatus = status,
                 retrofitService = ApiHolder.retrofitService,
-                db = AppDatabase.instance,
+                usersCache = RoomUsersCache(db = AppDatabase.instance),
             )
         )
     }
 
     private val adapter by lazy {
-        UsersAdapter(presenter::onUserClicked, GlideImageLoader())
+        UsersAdapter(presenter::onUserClicked, GlideImageLoader(RoomCacheImage(AppDatabase.instance, App.instance)))
     }
 
 

@@ -9,6 +9,8 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
+import gb.android.android_poplibs.cache.RoomCacheImage
+import gb.android.android_poplibs.cache.RoomRepoCache
 import gb.android.android_poplibs.databinding.FragmentUserDetailsBinding
 import gb.android.android_poplibs.db.AppDatabase
 import gb.android.android_poplibs.domain.GithubRepoRepositoryImpl
@@ -32,7 +34,7 @@ class UserDetailsFragment(
         private const val KEY_USER_MODEL = "KEY_USER_MODEL"
 
         fun newInstance(githubUserModel: GithubUserModel): UserDetailsFragment {
-            return UserDetailsFragment(GlideImageLoader()).apply {
+            return UserDetailsFragment(GlideImageLoader(RoomCacheImage(AppDatabase.instance, App.instance))).apply {
                 arguments = bundleOf(KEY_USER_MODEL to githubUserModel)
             }
         }
@@ -51,7 +53,7 @@ class UserDetailsFragment(
             githubRepoRepository = GithubRepoRepositoryImpl(
                 networkStatus = NetworkStatus(requireContext()),
                 retrofitService = ApiHolder.retrofitService,
-                db = AppDatabase.instance,
+                repoCache = RoomRepoCache(db = AppDatabase.instance),
             )
         )
     }

@@ -1,7 +1,6 @@
 package gb.android.android_poplibs.domain
 
-import gb.android.android_poplibs.db.AppDatabase
-import gb.android.android_poplibs.db.model.RoomGithubUser
+import gb.android.android_poplibs.cache.UsersCache
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.remote.RetrofitService
 import gb.android.android_poplibs.remote.connectivity.NetworkStatus
@@ -10,7 +9,7 @@ import io.reactivex.rxjava3.core.Single
 class GithubUsersRepositoryImpl(
     private val networkStatus: NetworkStatus,
     private val retrofitService: RetrofitService,
-    private val db: AppDatabase,
+    private val usersCache: UsersCache,
 ) : GithubUsersRepository {
 
 //    private val users = listOf(
@@ -32,23 +31,13 @@ class GithubUsersRepositoryImpl(
             retrofitService.getUsers()
                 .flatMap { users ->
                     Single.fromCallable {
-                        val roomUsers = users.map { user ->
-                            RoomGithubUser(user.id, user.login, user.avatarUrl, user.reposUrl)
-                        }
-                        db.userDao.insert(roomUsers)
+                        usersCache.cacheUsers(users)
                         users
                     }
                 }
         } else {
             Single.fromCallable {
-                db.userDao.getAll().map { roomModel ->
-                    GithubUserModel(
-                        roomModel.id,
-                        roomModel.login,
-                        roomModel.avatarUrl,
-                        roomModel.reposUrl
-                    )
-                }
+                return@fromCallable usersCache.getUsers()
             }
         }
     }

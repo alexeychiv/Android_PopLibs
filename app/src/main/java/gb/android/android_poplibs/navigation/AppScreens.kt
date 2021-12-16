@@ -1,7 +1,6 @@
 package gb.android.android_poplibs.navigation
 
 import android.content.Intent
-import androidx.core.os.bundleOf
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import gb.android.android_poplibs.model.GithubRepoModel
@@ -24,11 +23,7 @@ object AppScreens {
     }
 
     fun repoDetailsScreen(githubRepoModel: GithubRepoModel) = FragmentScreen {
-        RepoDetailsFragment().apply {
-            arguments = bundleOf(
-                "githubRepoModel" to githubRepoModel
-            )
-        }
+        RepoDetailsFragment.newInstance(githubRepoModel)
     }
 
     fun rxJavaDemoScreen() = ActivityScreen {

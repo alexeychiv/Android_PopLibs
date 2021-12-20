@@ -31,7 +31,7 @@ class NetworkModule {
     @Singleton
     @Provides
     fun retrofitService(
-            retrofit: Retrofit
+        retrofit: Retrofit
     ): RetrofitService {
         return retrofit.create<RetrofitService>()
     }
@@ -40,22 +40,22 @@ class NetworkModule {
     @Provides
     fun getGson(): Gson {
         return GsonBuilder()
-                .excludeFieldsWithoutExposeAnnotation()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create()
+            .excludeFieldsWithoutExposeAnnotation()
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .create()
     }
 
     @Singleton
     @Provides
     fun getRetrofit(
-            @Named(BASE_URL) baseUrl: String,
-            gson: Gson
+        @Named(BASE_URL) baseUrl: String,
+        gson: Gson
     ): Retrofit {
         return Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
+            .baseUrl(baseUrl)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
     }
 
     @Singleton

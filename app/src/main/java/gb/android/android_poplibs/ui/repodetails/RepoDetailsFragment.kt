@@ -32,8 +32,12 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
 
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.repoDetailsPresenterFactory()
-            .presenter(requireArguments().getParcelable<GithubRepoModel>(KEY_REPO_MODEL)!!)
+        App.instance.initRepoDetailsSubcomponent()
+        App.instance.repoDetailsSubcomponent?.repoDetailsPresenterFactory()
+            ?.presenter(
+                requireArguments()
+                    .getParcelable<GithubRepoModel>(KEY_REPO_MODEL)!!
+            )!!
     }
 
     override fun onCreateView(

@@ -18,7 +18,10 @@ class RoomImageCache(
         val path = db.imageDao.getPath(url)
 
         if (path == null) {
-            return BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher_background)
+            return BitmapFactory.decodeResource(
+                context.resources,
+                R.drawable.ic_launcher_background
+            )
         } else {
             val options = BitmapFactory.Options()
             options.inPreferredConfig = Bitmap.Config.RGB_565

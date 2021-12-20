@@ -7,7 +7,6 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.R
-import gb.android.android_poplibs.navigation.AppScreensImpl
 import gb.android.android_poplibs.ui.base.BackButtonListener
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter

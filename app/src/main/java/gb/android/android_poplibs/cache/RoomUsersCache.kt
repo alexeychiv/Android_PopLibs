@@ -10,7 +10,7 @@ class RoomUsersCache(
 ) : UsersCache {
 
     override fun getUsers(): Single<List<GithubUserModel>> {
-        return db.userDao.getAll().map {roomUsers->
+        return db.userDao.getAll().map { roomUsers ->
             roomUsers.map { roomGithubUser ->
                 GithubUserModel(
                     roomGithubUser.id,
@@ -22,7 +22,7 @@ class RoomUsersCache(
         }
     }
 
-    override fun cacheUsers(users: List<GithubUserModel>) : Single<List<GithubUserModel>> {
+    override fun cacheUsers(users: List<GithubUserModel>): Single<List<GithubUserModel>> {
         val roomUsers = users.map { githubUserModel ->
             RoomGithubUser(
                 githubUserModel.id,

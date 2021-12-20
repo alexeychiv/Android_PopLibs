@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Single
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: RoomGithubUser) : Completable
+    fun insert(user: RoomGithubUser): Completable
 
     @Update
     fun update(user: RoomGithubUser): Completable

@@ -13,7 +13,7 @@ import io.reactivex.rxjava3.core.Single
 interface RepoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: RoomGithubRepo) : Completable
+    fun insert(user: RoomGithubRepo): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(users: List<RoomGithubRepo>): Completable

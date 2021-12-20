@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.cache.RoomImageCache
-import gb.android.android_poplibs.databinding.FragmentUsersBinding
 import gb.android.android_poplibs.cache.db.AppDatabase
+import gb.android.android_poplibs.databinding.FragmentUsersBinding
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.ui.base.BackButtonListener
 import gb.android.android_poplibs.ui.imageloading.GlideImageLoader
@@ -24,7 +24,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         get() = _binding!!
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.usersPresenter()
+        App.instance.initUsersSubcomponent()
+        App.instance.usersSubcomponent?.usersPresenter()!!
     }
 
     private val adapter by lazy {

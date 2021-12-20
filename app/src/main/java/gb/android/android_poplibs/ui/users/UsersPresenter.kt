@@ -2,11 +2,10 @@ package gb.android.android_poplibs.ui.users
 
 import android.util.Log
 import com.github.terrakok.cicerone.Router
+import gb.android.android_poplibs.di.scope.containers.UsersScopeContainer
 import gb.android.android_poplibs.domain.GithubUsersRepository
-import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.navigation.AppScreens
-import gb.android.android_poplibs.navigation.AppScreensImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
@@ -16,6 +15,7 @@ class UsersPresenter @Inject constructor(
     private val router: Router,
     private val usersRepository: GithubUsersRepository,
     private val appScreens: AppScreens,
+    private val usersScopeContainer: UsersScopeContainer,
 ) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
@@ -25,6 +25,11 @@ class UsersPresenter @Inject constructor(
 
     fun onUserClicked(githubUserModel: GithubUserModel) {
         router.navigateTo(appScreens.userDetailsScreen(githubUserModel))
+    }
+
+    override fun onDestroy() {
+        usersScopeContainer.destroyUsersSubcomponent()
+        super.onDestroy()
     }
 
     private fun loadData() {

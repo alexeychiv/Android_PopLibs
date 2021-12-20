@@ -10,8 +10,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.cache.RoomImageCache
-import gb.android.android_poplibs.databinding.FragmentUserDetailsBinding
 import gb.android.android_poplibs.cache.db.AppDatabase
+import gb.android.android_poplibs.databinding.FragmentUserDetailsBinding
 import gb.android.android_poplibs.model.GithubRepoModel
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.ui.base.BackButtonListener
@@ -30,7 +30,14 @@ class UserDetailsFragment(
         private const val KEY_USER_MODEL = "KEY_USER_MODEL"
 
         fun newInstance(githubUserModel: GithubUserModel): UserDetailsFragment {
-            return UserDetailsFragment(GlideImageLoader(RoomImageCache(AppDatabase.instance, App.instance))).apply {
+            return UserDetailsFragment(
+                GlideImageLoader(
+                    RoomImageCache(
+                        AppDatabase.instance,
+                        App.instance
+                    )
+                )
+            ).apply {
                 arguments = bundleOf(KEY_USER_MODEL to githubUserModel)
             }
         }
@@ -46,7 +53,9 @@ class UserDetailsFragment(
     }
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.userDetailsPresenterFactory().presenter(githubUserModel)
+        App.instance.initUserDetailsSubcomponent()
+        App.instance.userDetailsSubcomponent?.userDetailsPresenterFactory()
+            ?.presenter(githubUserModel)!!
     }
 
     private val adapter by lazy {

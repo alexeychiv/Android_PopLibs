@@ -6,8 +6,9 @@ import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.remote.RetrofitService
 import gb.android.android_poplibs.remote.connectivity.NetworkStatus
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class GithubRepoRepositoryImpl(
+class GithubRepoRepositoryImpl @Inject constructor(
     private val networkStatus: NetworkStatus,
     private val retrofitService: RetrofitService,
     private val repoCache: RepoCache,

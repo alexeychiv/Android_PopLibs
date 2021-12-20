@@ -32,23 +32,17 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
 
 
     private val presenter by moxyPresenter {
-        RepoDetailsPresenter(
-            App.instance.router,
-            requireArguments().getParcelable<GithubRepoModel>(KEY_REPO_MODEL)!!
-        )
+        App.instance.appComponent.repoDetailsPresenterFactory()
+            .presenter(requireArguments().getParcelable<GithubRepoModel>(KEY_REPO_MODEL)!!)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRepoDetailsBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroy() {

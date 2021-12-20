@@ -7,14 +7,10 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
-import gb.android.android_poplibs.cache.RoomCacheImage
-import gb.android.android_poplibs.cache.RoomUsersCache
+import gb.android.android_poplibs.cache.RoomImageCache
 import gb.android.android_poplibs.databinding.FragmentUsersBinding
 import gb.android.android_poplibs.db.AppDatabase
-import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
-import gb.android.android_poplibs.remote.ApiHolder
-import gb.android.android_poplibs.remote.connectivity.NetworkStatus
 import gb.android.android_poplibs.ui.base.BackButtonListener
 import gb.android.android_poplibs.ui.imageloading.GlideImageLoader
 import gb.android.android_poplibs.ui.users.adapter.UsersAdapter
@@ -27,21 +23,15 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val binding: FragmentUsersBinding
         get() = _binding!!
 
-    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
-
     private val presenter by moxyPresenter {
-        UsersPresenter(
-            router = App.instance.router,
-            githubUsersRepositoryImpl = GithubUsersRepositoryImpl(
-                networkStatus = status,
-                retrofitService = ApiHolder.retrofitService,
-                usersCache = RoomUsersCache(db = AppDatabase.instance),
-            )
-        )
+        App.instance.appComponent.usersPresenter()
     }
 
     private val adapter by lazy {
-        UsersAdapter(presenter::onUserClicked, GlideImageLoader(RoomCacheImage(AppDatabase.instance, App.instance)))
+        UsersAdapter(
+            presenter::onUserClicked,
+            GlideImageLoader(RoomImageCache(AppDatabase.instance, App.instance))
+        )
     }
 
 
@@ -49,7 +39,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUsersBinding.inflate(inflater, container, false)
         return binding.root
     }

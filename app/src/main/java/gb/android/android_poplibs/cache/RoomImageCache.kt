@@ -9,7 +9,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 
-class RoomCacheImage(
+class RoomImageCache(
     private val db: AppDatabase,
     private val context: Context,
 ) : ImageCache {

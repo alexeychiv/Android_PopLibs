@@ -9,15 +9,11 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
-import gb.android.android_poplibs.cache.RoomCacheImage
-import gb.android.android_poplibs.cache.RoomRepoCache
+import gb.android.android_poplibs.cache.RoomImageCache
 import gb.android.android_poplibs.databinding.FragmentUserDetailsBinding
 import gb.android.android_poplibs.db.AppDatabase
-import gb.android.android_poplibs.domain.GithubRepoRepositoryImpl
 import gb.android.android_poplibs.model.GithubRepoModel
 import gb.android.android_poplibs.model.GithubUserModel
-import gb.android.android_poplibs.remote.ApiHolder
-import gb.android.android_poplibs.remote.connectivity.NetworkStatus
 import gb.android.android_poplibs.ui.base.BackButtonListener
 import gb.android.android_poplibs.ui.imageloading.GlideImageLoader
 import gb.android.android_poplibs.ui.imageloading.ImageLoader
@@ -34,7 +30,7 @@ class UserDetailsFragment(
         private const val KEY_USER_MODEL = "KEY_USER_MODEL"
 
         fun newInstance(githubUserModel: GithubUserModel): UserDetailsFragment {
-            return UserDetailsFragment(GlideImageLoader(RoomCacheImage(AppDatabase.instance, App.instance))).apply {
+            return UserDetailsFragment(GlideImageLoader(RoomImageCache(AppDatabase.instance, App.instance))).apply {
                 arguments = bundleOf(KEY_USER_MODEL to githubUserModel)
             }
         }
@@ -45,17 +41,12 @@ class UserDetailsFragment(
     private val binding: FragmentUserDetailsBinding
         get() = _binding!!
 
+    private val githubUserModel: GithubUserModel by lazy {
+        requireArguments().getParcelable<GithubUserModel>(KEY_USER_MODEL) as GithubUserModel
+    }
 
     private val presenter by moxyPresenter {
-        UserDetailsPresenter(
-            router = App.instance.router,
-            githubUserModel = requireArguments().getParcelable<GithubUserModel>(KEY_USER_MODEL)!!,
-            githubRepoRepository = GithubRepoRepositoryImpl(
-                networkStatus = NetworkStatus(requireContext()),
-                retrofitService = ApiHolder.retrofitService,
-                repoCache = RoomRepoCache(db = AppDatabase.instance),
-            )
-        )
+        App.instance.appComponent.userDetailsPresenterFactory().presenter(githubUserModel)
     }
 
     private val adapter by lazy {

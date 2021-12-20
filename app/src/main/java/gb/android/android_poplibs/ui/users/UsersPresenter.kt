@@ -2,16 +2,20 @@ package gb.android.android_poplibs.ui.users
 
 import android.util.Log
 import com.github.terrakok.cicerone.Router
+import gb.android.android_poplibs.domain.GithubUsersRepository
 import gb.android.android_poplibs.domain.GithubUsersRepositoryImpl
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.navigation.AppScreens
+import gb.android.android_poplibs.navigation.AppScreensImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class UsersPresenter(
+class UsersPresenter @Inject constructor(
     private val router: Router,
-    private val githubUsersRepositoryImpl: GithubUsersRepositoryImpl
+    private val usersRepository: GithubUsersRepository,
+    private val appScreens: AppScreens,
 ) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
@@ -20,11 +24,11 @@ class UsersPresenter(
     }
 
     fun onUserClicked(githubUserModel: GithubUserModel) {
-        router.navigateTo(AppScreens.userDetailsScreen(githubUserModel))
+        router.navigateTo(appScreens.userDetailsScreen(githubUserModel))
     }
 
     private fun loadData() {
-        githubUsersRepositoryImpl.getUsers()
+        usersRepository.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {

@@ -29,16 +29,9 @@ class GithubUsersRepositoryImpl(
     override fun getUsers(): Single<List<GithubUserModel>> {
         return if (networkStatus.isOnline()) {
             retrofitService.getUsers()
-                .flatMap { users ->
-                    Single.fromCallable {
-                        usersCache.cacheUsers(users)
-                        users
-                    }
-                }
+                .flatMap(usersCache::cacheUsers)
         } else {
-            Single.fromCallable {
-                return@fromCallable usersCache.getUsers()
-            }
+            usersCache.getUsers()
         }
     }
 

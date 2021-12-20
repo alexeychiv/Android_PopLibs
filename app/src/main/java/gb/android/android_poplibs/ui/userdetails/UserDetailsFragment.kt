@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import gb.android.android_poplibs.App
 import gb.android.android_poplibs.cache.RoomImageCache
 import gb.android.android_poplibs.databinding.FragmentUserDetailsBinding
-import gb.android.android_poplibs.db.AppDatabase
+import gb.android.android_poplibs.cache.db.AppDatabase
 import gb.android.android_poplibs.model.GithubRepoModel
 import gb.android.android_poplibs.model.GithubUserModel
 import gb.android.android_poplibs.ui.base.BackButtonListener

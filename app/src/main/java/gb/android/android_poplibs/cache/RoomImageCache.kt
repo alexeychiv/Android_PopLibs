@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import gb.android.android_poplibs.R
-import gb.android.android_poplibs.db.AppDatabase
+import gb.android.android_poplibs.cache.db.AppDatabase
 import java.io.FileOutputStream
 import java.io.IOException
 

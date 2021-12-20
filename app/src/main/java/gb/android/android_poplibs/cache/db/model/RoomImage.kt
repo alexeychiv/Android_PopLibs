@@ -1,4 +1,4 @@
-package gb.android.android_poplibs.db.model
+package gb.android.android_poplibs.cache.db.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

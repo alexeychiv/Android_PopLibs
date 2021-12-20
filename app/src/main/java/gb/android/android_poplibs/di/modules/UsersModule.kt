@@ -4,7 +4,6 @@ import dagger.Module
 import dagger.Provides
 import gb.android.android_poplibs.cache.RepoCache
 import gb.android.android_poplibs.cache.UsersCache
-import gb.android.android_poplibs.db.AppDatabase
 import gb.android.android_poplibs.domain.GithubRepoRepository
 import gb.android.android_poplibs.domain.GithubRepoRepositoryImpl
 import gb.android.android_poplibs.domain.GithubUsersRepository

@@ -1,15 +1,15 @@
-package gb.android.android_poplibs.db
+package gb.android.android_poplibs.cache.db
 
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import gb.android.android_poplibs.App
-import gb.android.android_poplibs.db.dao.ImageDao
-import gb.android.android_poplibs.db.dao.RepoDao
-import gb.android.android_poplibs.db.dao.UserDao
-import gb.android.android_poplibs.db.model.RoomGithubRepo
-import gb.android.android_poplibs.db.model.RoomGithubUser
-import gb.android.android_poplibs.db.model.RoomImage
+import gb.android.android_poplibs.cache.db.dao.ImageDao
+import gb.android.android_poplibs.cache.db.dao.RepoDao
+import gb.android.android_poplibs.cache.db.dao.UserDao
+import gb.android.android_poplibs.cache.db.model.RoomGithubRepo
+import gb.android.android_poplibs.cache.db.model.RoomGithubUser
+import gb.android.android_poplibs.cache.db.model.RoomImage
 
 
 @Database(

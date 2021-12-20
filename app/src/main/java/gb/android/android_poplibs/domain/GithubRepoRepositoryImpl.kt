@@ -16,16 +16,9 @@ class GithubRepoRepositoryImpl(
     override fun getRepos(githubUserModel: GithubUserModel): Single<List<GithubRepoModel>> {
         return if (networkStatus.isOnline()) {
             retrofitService.getRepos(githubUserModel.reposUrl)
-                .flatMap { repos ->
-                    Single.fromCallable {
-                        repoCache.cacheRepos(repos)
-                        repos
-                    }
-                }
+                .flatMap(repoCache::cacheRepos)
         } else {
-            Single.fromCallable {
-                return@fromCallable repoCache.getRepos(githubUserModel)
-            }
+            repoCache.getRepos(githubUserModel)
         }
     }
 
